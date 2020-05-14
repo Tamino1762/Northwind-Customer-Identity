@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Northwind.Models
 {
@@ -16,3 +19,4 @@ namespace Northwind.Models
         public Product Product { get; set; }
     }
 }
+

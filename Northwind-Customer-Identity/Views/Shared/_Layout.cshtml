@@ -41,8 +41,6 @@
                         <a class="dropdown-item" asp-controller="Customer" asp-action="Account"><i class="fas fa-user"></i> Account</a>
                         @if (User?.Identity?.IsAuthenticated ?? false)
                         {
-                            //view cart
-
                             <a class="dropdown-item" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
                         }
                         else
@@ -55,6 +53,8 @@
             </ul>
             @if (User?.Identity?.IsAuthenticated ?? false)
             {
+                //view cart
+                <a class="signInOut mr-2" asp-controller="Cart" asp-action="Index"><i class="fas fa-shopping-cart"></i> Cart</a>
                 <a class="signInOut mr-2" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
             }
             else

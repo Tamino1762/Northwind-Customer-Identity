@@ -64,5 +64,15 @@ namespace Northwind.Models
             cartItem.Product = context.Products.Find(cartItem.ProductId);
             return cartItem;
         }
+        public CartItem ViewCart(CartItemJSON cartItemJSON)
+        {
+            int CustomerId = context.Customers.FirstOrDefault(c => c.Email == cartItemJSON.email).CustomerID;
+            int ProductId = cartItemJSON.id;
+            // check for duplicate cart item
+            CartItem cartItem = context.CartItems.FirstOrDefault(ci => ci.ProductId == ProductId && ci.CustomerId == CustomerId);
+
+            cartItem.Product = context.Products.Find(cartItem.ProductId);
+            return cartItem;
+        }
     }
 }

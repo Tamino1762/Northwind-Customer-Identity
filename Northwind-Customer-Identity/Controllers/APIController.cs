@@ -34,5 +34,8 @@ namespace Northwind.Controllers //creates json objects can look up the routes in
         [HttpPost, Route("api/addtocart")]
         // adds a row to the cartitem table
         public CartItem Post([FromBody] CartItemJSON cartItem) => repository.AddToCart(cartItem);
+
+        [HttpGet, Route("api/viewCart/{id}")]
+        public IEnumerable<CartItem> GetCart(int id) => repository.CartItems.Where(c => c.CustomerId == id);
     }
 }

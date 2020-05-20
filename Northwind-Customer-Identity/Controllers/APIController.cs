@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Northwind.Models;
 
 namespace Northwind.Controllers //creates json objects can look up the routes in Postman
@@ -36,6 +37,6 @@ namespace Northwind.Controllers //creates json objects can look up the routes in
         public CartItem Post([FromBody] CartItemJSON cartItem) => repository.AddToCart(cartItem);
 
         [HttpGet, Route("api/viewCart/{id}")]
-        public IEnumerable<CartItem> GetCart(int id) => repository.CartItems.Where(c => c.CustomerId == id);
+        public IEnumerable<CartItem> GetCart(int id) => repository.CartItems.Include("Product").Where(c => c.CustomerId == id);
     }
 }

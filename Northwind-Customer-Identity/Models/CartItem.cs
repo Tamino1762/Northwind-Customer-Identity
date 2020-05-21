@@ -14,7 +14,7 @@ namespace Northwind.Models
         public int CustomerId { get; set; }
         [Required]
         public int Quantity { get; set; }
-        public Customer Customer { get; set; }
+        //public Customer Customer { get; set; }
         public Product Product { get; set; }
     }
 }

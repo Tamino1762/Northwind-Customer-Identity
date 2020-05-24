@@ -18,6 +18,8 @@ namespace Northwind.Models
         public IQueryable<Customer> Customers => context.Customers;
         public IQueryable<CartItem> CartItems => context.CartItems;
 
+        public int ProductId { get; private set; }
+
         public void AddCustomer(Customer customer)
         {
             context.Customers.Add(customer);
@@ -73,6 +75,14 @@ namespace Northwind.Models
 
             cartItem.Product = context.Products.Find(cartItem.ProductId);
             return cartItem;
+        }
+        public void EditCart(CartItem cartItem) //update like in the customer edit table?
+        {
+            var itemToUpdate = context.CartItems.FirstOrDefault(ci => ci.ProductId == ProductId);
+
+            itemToUpdate.Quantity = cartItem.Quantity; //update quantity
+            itemToUpdate.Product = cartItem.Product; // for removing the product
+            context.SaveChanges();
         }
     }
 }

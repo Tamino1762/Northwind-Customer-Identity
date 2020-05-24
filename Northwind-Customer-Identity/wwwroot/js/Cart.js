@@ -13,7 +13,7 @@
                     var total = response[i].quantity * response[i].product.unitPrice;
                     var row = "<tr" + " data-id=\"" + response[i].product.productId + "\" data-name=\"" + response[i].product.productName + "\" data-price=\"" + response[i].product.unitPrice + "\">"
                         + "<td>" + response[i].product.productName + "</td>"
-                        + "<td class=\"text-right\">"  + response[i].quantity + "</td>"
+                        + "<td class=\"text-right\">" + response[i].quantity + "</td>"
                         + "<td class=\"text-right\">" + response[i].product.unitPrice + "</td>"
                         + "<td class=\"text-right\">$" + total + "</td>"
                         + "</tr>";
@@ -28,12 +28,40 @@
             }
         })
     }
+    //function getCartItems() {
+    //    var id = $('#cart_rows').data('id');
+
+    //    $.getJSON({
+    //        url: "../../api/viewCart/" + id,
+    //        success: function (response, textStatus, jqXhr) {
+    //            console.log(response);
+    //            $('#cart_rows').html("");
+    //            var cartTotal = 0;
+    //            for (var i = 0; i < response.length; i++) {
+    //                var total = response[i].quantity * response[i].product.unitPrice;
+    //                var row = "<tr" + " data-id=\"" + response[i].product.productId + "\" data-name=\"" + response[i].product.productName + "\" data-price=\"" + response[i].product.unitPrice + "\">"
+    //                    + "<td>" + response[i].product.productName + "</td>"
+    //                    + "<td class=\"text-right\">"  + response[i].quantity + "</td>"
+    //                    + "<td class=\"text-right\">" + response[i].product.unitPrice + "</td>"
+    //                    + "<td class=\"text-right\">$" + total + "</td>"
+    //                    + "</tr>";
+    //                $('#cart_rows').append(row);
+    //                cartTotal += total;
+    //            }
+    //            $('#cart-total').append("<div class=\"float-right\">" + "<h2>your cart total is $" + cartTotal + "</h2></div>");
+
+    //        },
+    //        error: function (jqXhr, textStatus, errorThrown) {
+    //            console.log("The following error has occured: " + textStatus, errorThrown);
+    //        }
+    //    })
+    //}
 
     //// update total when cart quantity is changed
     $('#Quantity').change(function () {
         //update total
         //update overalltotal
-        alert("change")
+        //alert("change")
         var total = parseInt($(this).val() * 2);
         //var total = parseInt($(this).val()) * parseFloat($('#UnitPrice').html());
         $('#Total').html(numberWithCommas(total.toFixed(2)));
@@ -51,12 +79,13 @@
     $('#cart_rows').on('click', 'td', function () {
         //alert("clicked");
         // make sure a customer is logged in
+        //console.log($(this).data('id'));
        
             $('#ProductId').html($(this).data('id'));
             $('#ProductName').html($(this).data('name'));
             $('#UnitPrice').html($(this).data('price'));
             // calculate and display total in modal
-            //$('#Quantity').change();
+            $('#Quantity').change();
             $('#cartModal').modal();
        
 
@@ -78,8 +107,8 @@
         // AJAX to update database
         $.ajax({
             headers: { "Content-Type": "application/json" },
-            url: "../../api/addtocart",
-            type: 'post',
+            url: "../../api/viewItem",
+            type: 'get',
             data: JSON.stringify({
                 "id": $('#ProductId').html(),
                 "email": $('#User').data('email'),
@@ -106,4 +135,9 @@
     //        $('#Quantity').change();
     //        $('#cartModal').modal();
     //});
+    function toast(header, message) {
+        $('#toast_header').html(header);
+        $('#toast_body').html(message);
+        $('#cart_toast').toast({ delay: 2500 }).toast('show');
+    }
 });

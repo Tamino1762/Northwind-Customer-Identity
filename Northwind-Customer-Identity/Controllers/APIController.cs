@@ -38,5 +38,8 @@ namespace Northwind.Controllers //creates json objects can look up the routes in
 
         [HttpGet, Route("api/viewCart/{id}")]
         public IEnumerable<CartItem> GetCart(int id) => repository.CartItems.Include("Product").Where(c => c.CustomerId == id);
+
+        [HttpGet, Route("api/viewItem/{id}")] //maybe this will help to update the product?
+        public IEnumerable<CartItem> GetItem(int id) => repository.CartItems.Include("Product").Where(ci => ci.ProductId == id);
     }
 }

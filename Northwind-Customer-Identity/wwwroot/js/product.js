@@ -37,6 +37,7 @@
 
     // delegated event listener
     $('#product_rows').on('click', 'tr', function () {
+        console.log($(this).data('name'));
         // make sure a customer is logged in
         if ($('#User').data('customer').toLowerCase() == "true") {
             $('#ProductId').html($(this).data('id'));

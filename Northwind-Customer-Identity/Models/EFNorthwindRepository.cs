@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Northwind.Models
 {
@@ -76,13 +77,18 @@ namespace Northwind.Models
             cartItem.Product = context.Products.Find(cartItem.ProductId);
             return cartItem;
         }
-        public void EditCart(CartItem cartItem) //update like in the customer edit table?
+        public void EditCart(CartItemJSON cartItem, int id) //update like in the customer edit table?
         {
-            var itemToUpdate = context.CartItems.FirstOrDefault(ci => ci.ProductId == ProductId);
-
-            itemToUpdate.Quantity = cartItem.Quantity; //update quantity
-            itemToUpdate.Product = cartItem.Product; // for removing the product
+            //int CustomerId = repository.Customers.FirstOrDefault(c => c.Email == User.Identity.Name).CustomerID;
+            var itemToUpdate = context.CartItems.FirstOrDefault(ci => ci.ProductId == cartItem.id && ci.CustomerId == id);
+            //context.CartItems
+            //Console.Write("hello");
+            //System.Diagnostics.Debug.WriteLine("hello");
+            //System.Diagnostics.Debug.WriteLine(cartItem.qty);
+            //System.Diagnostics.Debug.WriteLine("item: " + itemToUpdate.FirstOrDefault().Quantity);
+            itemToUpdate.Quantity = cartItem.qty; //update quantity
             context.SaveChanges();
+            //return itemToUpdate;
         }
     }
 }

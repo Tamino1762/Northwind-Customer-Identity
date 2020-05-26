@@ -22,3 +22,6 @@
 #product_rows tr {
     cursor: pointer;
 }
+.discount {
+    clear: both;
+}

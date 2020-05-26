@@ -90,5 +90,20 @@ namespace Northwind.Models
             context.SaveChanges();
             //return itemToUpdate;
         }
+
+        public void DeleteItem(CartItem cartItem)
+        {
+            context.Remove(cartItem);
+            context.SaveChanges();
+        }
+
+        public void pay(IQueryable cartItems)
+        {
+            foreach (var item in cartItems)
+            {
+                context.Remove(item);
+            }
+            context.SaveChanges();
+        }
     }
 }

@@ -15,5 +15,9 @@ namespace Northwind.Models
         CartItem AddToCart(CartItemJSON cartItemJSON);
         CartItem ViewCart(CartItemJSON cartItemJSON);
         void EditCart(CartItemJSON cartItem, int id);
+
+        void DeleteItem(CartItem cartItem);
+
+        void pay(IQueryable cartItems);
     }
 }
